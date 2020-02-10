@@ -85,6 +85,7 @@ export default class Form extends React.Component {
         foreasProstasias: {
           arrayLength: [1],
           foreasIndex: 0,
+          selected: 0,
           data: [1],
         },
         idioktisiakoKathestws: '',
@@ -202,10 +203,9 @@ export default class Form extends React.Component {
       currentState[name].data[currentState[name].currentIndex] = value;
     else if(name === 'foreasProstasias'){      
       currentState[name].data[dataset.foreas] = value;
-      currentState[name].foreasIndex = dataset.foreas
+      currentState[name].selected = parseInt(dataset.foreas)
     }
-
-    console.log(currentState[name].data[currentState[name].foreasIndex])
+    console.log(currentState[name].data)
 
   }
   addUsage = () => {    
@@ -241,9 +241,14 @@ export default class Form extends React.Component {
     const currentState = thesmikoPlaisio;
     currentState[obj].arrayLength.push(1);
     currentState[obj].data.push(1);
-    obj === 'kiriksi' ? currentState[obj].currentIndex += 1 : currentState[obj].foreasIndex += 1
+    if(obj === 'kiriksi')
+      currentState[obj].currentIndex += 1 
+    else {
+      currentState[obj].foreasIndex += 1
+    }
+
+    console.log(currentState[obj])
     this.setState({thesmikoPlaisio: currentState})
-    console.log(this.state.thesmikoPlaisio)
   }
   deleteDecoration = (obj) => {
     const { decorations } = { ...this.state }

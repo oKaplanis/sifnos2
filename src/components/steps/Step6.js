@@ -30,7 +30,7 @@ function Step6(props) {
         </div>
         {/* EDW PROSTHIKI FOREA PROSTASIA*/ }
         {props.thesmikoPlaisio.foreasProstasias.arrayLength.map((e,index)=>
-            <ForeasProstasias handleThesmikoPLaisio={props.handleThesmikoPLaisio} index={index} foreasProstasias={props.thesmikoPlaisio.foreasProstasias}/>
+            <ForeasProstasias key={index+4} handleThesmikoPLaisio={props.handleThesmikoPLaisio} index={index} foreasProstasias={props.thesmikoPlaisio.foreasProstasias}/>
         )}
         <label key={uuid.v4()} className="sub-label">Ιδιοκτησιακό καθεστώς χώρου</label>
         <select
@@ -55,10 +55,10 @@ function Step6(props) {
         />
 
         <label key={uuid.v4()} className="sub-label">Οργανωμένος αρχ/κός χώρος</label>
-        <RadioButton options={inputs.thesmikoPlaisio.organized.radio}/>
+        {/* <RadioButton options={inputs.thesmikoPlaisio.organized.radio}/> */}
 
         <label key={uuid.v4()} className="sub-label">Επισκέψιμος αρχ/κός χώρος</label>
-        <RadioButton options={inputs.thesmikoPlaisio.visitable.radio}/>
+        {/* <RadioButton options={inputs.thesmikoPlaisio.visitable.radio}/> */}
       </div>
     );
   }
@@ -84,22 +84,18 @@ function Step6(props) {
   function ForeasProstasias(props){
       const foreas = props.foreasProstasias;
       return(
-          <div key={props.index+4}>
+          <div>
             <label key={uuid.v4()} className="sub-label">Φορέας Προστασίας</label>
             <select
             key={uuid.v4()}
             className="form-control"
             name="foreasProstasias"
-            onChange={props.handleThesmikoPLaisio}
+            onClick={props.handleThesmikoPLaisio}
             data-foreas={props.index}
-            value={foreas.data[props.index] !== 1 ? foreas.data[props.index] : ''} 
-            >
-            
-            {console.log(foreas.data[props.index],foreas.data[props.index] === 1)}
-            
+            >            
             {foreas.data[props.index] !== 1 ?  
-              <option disabled>{foreas.data[props.index]}</option> : 
-              <option defaultValue={"Επιλογή"} >Επιλογή</option> 
+              <option >{foreas.data[props.index]}</option> : 
+              <option disabled defaultValue={"Επιλογή"} >Επιλογή</option> 
             }
             {inputs.thesmikoPlaisio.foreasProstasias.data.map(option => 
                 <option key={uuid.v4()}>{option}</option>    
